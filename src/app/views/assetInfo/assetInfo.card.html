@@ -1,0 +1,124 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">资产详情</label>
+    </div>
+
+</div>
+
+<div class="modal-body form">
+    <form id="assetForm" name="assetForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">资产名称</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="assetName" ng-disabled="!beginEdit" ng-model="assetInfo.assetName" required/>
+                <span ng-show="!assetForm.assetName.$valid" style="color:red">请填写资产名称</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="assetInfo.assetNo">
+            <label class="col-sm-3 control-label">资产编号</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="assetNo" ng-disabled="true" ng-model="assetInfo.assetNo"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">资产所有人</label>
+            <div class="col-sm-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="userSelectize" ng-model="assetInfo.userId" ng-disabled="!beginEdit" placeholder="请填写资产所有人" required></select>
+                <span ng-show="!assetInfo.userId" style="color:red">请填写资产所有人</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">物业类型</label>
+            <div class="col-sm-8">
+                <select class="form-control" ng-model="assetInfo.propertyType"
+                        ng-options="house.id as house.name for house in houses"  style="width: 100%" ng-disabled="!beginEdit" ng-change="propertyChange()" required>
+                    <option value="">-- 请选择类型 --</option>
+                </select>
+                <div ng-show="!assetInfo.propertyType" style="color:red">请选择物业类型</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">房源名称</label>
+            <div class="col-sm-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="houseSelectize" ng-model="assetInfo.houseId" ng-disabled="!beginEdit" placeholder="请填写名称"></select>
+                <span ng-show="!assetInfo.houseId" style="color:red">请填写房源名称</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">房型</label>
+            <div class="col-sm-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="houseTypeSelectize" ng-model="assetInfo.houseTypeId" ng-disabled="!beginEdit"
+                        placeholder="请填写房型"></select>
+                <span ng-show="!assetInfo.houseTypeId" style="color:red">请填写房型</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">房源地址</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="houseAddress" ng-disabled="true" ng-model="assetInfo.houseAddress" required/>
+                <span ng-show="!assetInfo.houseAddress" style="color:red">填写地址（请选择房源）</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">详细地址</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="address" ng-disabled="!beginEdit" ng-model="assetInfo.address" required/>
+                <span ng-show="!assetInfo.address" style="color:red">请填写具体资产地址（门牌号等）</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">面积</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" name="area" ng-disabled="true" ng-model="assetInfo.houseArea" required/>
+                <span ng-show="!assetInfo.houseArea" style="color:red">填写面积（请选择房型）</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">合同开始时间</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="startDate"  size="16" type="text" datepicker-popup="yyyy-MM-dd" ng-model="assetInfo.startTerm" readonly required  datetimez ng-disabled="!beginEdit"/>
+                <span ng-show="!assetInfo.startTerm" style="color:red">日期格式:yyyy-mm-dd</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">合同结束时间</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="endDate"  size="16" type="text" datepicker-popup="yyyy-MM-dd" ng-model="assetInfo.endTerm" readonly required  datetimez ng-disabled="!beginEdit"/>
+                <span ng-show="!assetInfo.endTerm" style="color:red">日期格式:yyyy-mm-dd</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">服务类型</label>
+
+            <div class="col-sm-8" style="vertical-align:middle">
+                <select name="serviceType" ng-disabled="!beginEdit" ng-model="assetInfo.serviceType"
+                        class="form-control input-inline"
+                        ng-options="categoryService.id  as categoryService.name for categoryService in services"
+                        ng-change="contentChange()" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <span ng-show="!assetInfo.serviceType" style="color:red">请填写服务类型</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer" ng-if="!isRead">
+    <span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail" style="color: red">保存失败!!!</span>
+    <button ng-show="showButton" type="button" class="btn btn-success btn-modal" ng-click="save()" ng-disabled="assetForm.$invalid || holdDoubleClick == true">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>
+
+
+
+

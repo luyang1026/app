@@ -1,0 +1,103 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">资产收益详情</label>
+    </div>
+</div>
+
+<div class="modal-body form">
+    <form id="butlerForm" name="butlerForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">资产名称</label>
+            <div class="col-md-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="assetSelectize" ng-model="income.assetId" ng-disabled="!beginEdit" placeholder="请输入资产名称" required></select>
+                <span ng-show="!income.assetId" style="color:red">请填写资产名称</span>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <label class="col-md-3 control-label">时间</label>
+            <div class="col-md-8">
+                <input id="datetimez" class="form-control"  size="16" type="text" required datepicker-popup="yyyy-MM-dd" ng-model="income.date" readonly  datetimez ng-disabled="!beginEdit" value="2016-04-20"/>
+                <span ng-show="!income.date" style="color:red">请选择时间</span>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">资产所有人</label>
+            <div class="col-md-8">
+                <input type="text" name="duration" ng-disabled="true" ng-model="income.userName" required class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">房间收入</label>
+            <div class="col-md-8">
+                <input type="text" name="homeIncome" ng-disabled="!beginEdit" ng-model="income.homeIncome" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.homeIncome" style="color:red">请填写房间收入</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">税费</label>
+            <div class="col-md-8">
+                <input type="text" name="taxation" ng-disabled="!beginEdit" ng-model="income.taxation" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control" />
+                <span ng-show="!income.taxation" style="color:red">请填写税费</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">佣金</label>
+            <div class="col-md-8">
+                <input type="text" name="commission" ng-disabled="!beginEdit" ng-model="income.commission" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.commission" style="color:red">请填写佣金</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">业主收益</label>
+            <div class="col-md-8">
+                <input type="text" name="ownerIncome" ng-disabled="!beginEdit" ng-model="income.ownerIncome" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.ownerIncome" style="color:red">请填写业主收益</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">租赁税率</label>
+            <div class="col-md-8">
+                <input type="text" name="rentalRate" ng-disabled="!beginEdit" ng-model="income.rentalRate" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.rentalRate" style="color:red">请填写租赁税率</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">业主实际收益</label>
+            <div class="col-md-8">
+                <input type="text" name="realIncome" ng-disabled="!beginEdit" ng-model="income.realIncome" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.realIncome" style="color:red">请填写业主实际收益</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">其他扣款</label>
+            <div class="col-md-8">
+                <input type="text" name="otherDeductions" ng-disabled="!beginEdit" ng-model="income.otherDeductions" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required class="form-control"/>
+                <span ng-show="!income.otherDeductions" style="color:red">请填写其他扣款</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">最终收益</label>
+            <div class="col-md-8">
+                <input type="text" name="finalIncome" ng-disabled="!beginEdit" ng-model="income.finalIncome" ng-pattern = '/^([1-9]\d*|0)(\.\d{2})?$/' required  class="form-control"/>
+                <span ng-show="!income.finalIncome" style="color:red">请填写最终收益</span>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer" ng-if="!isRead">
+    <span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail && !saveSuccess" style="color: red">保存失败!!!</span>
+    <button ng-show="showButton" type="button" class="btn btn-success btn-modal" ng-click="assign()" ng-disabled="butlerForm.$invalid || holdDoubleClick == true">确认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取消</button>
+</div>
+
+
+
+

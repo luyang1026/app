@@ -1,0 +1,71 @@
+.size-procent (@n: 20 , @i: 1) when (@i =< @n) {
+	@rate: (@i * 100 / @n);
+	@r: (@rate * 1%);
+	.w@{rate}p {
+		width: @r;
+	}
+
+	.h@{rate}p {
+		height: @r;
+	}
+
+	.size-procent (@n , (@i + 1));
+}
+
+.mp-procent (@n: 10 , @i: 1) when (@i =< @n) {
+	@rate: (@i * 50 / @n);
+	@r: (@rate * 1%);
+	
+	.m@{rate}p, mt@{rate}p {
+		margin-top: @r;
+	}
+	
+	.p@{rate}p, pt@{rate}p  {
+		padding-top: @r;
+	}
+	
+	.m@{rate}p, mb@{rate}p {
+		margin-bottom: @r;
+	}
+	
+	.p@{rate}p, pb@{rate}p  {
+		padding-bottom: @r;
+	}
+	
+	.m@{rate}p, ml@{rate}p {
+		margin-left: @r;
+	}
+	
+	.p@{rate}p, pl@{rate}p  {
+		padding-left: @r;
+	}
+	
+	.m@{rate}p, mr@{rate}p {
+		margin-right: @r;
+	}
+	
+	.p@{rate}p, pt@{rate}p  {
+		padding-right: @r;
+	}	
+	
+	.mp-procent (@n , (@i + 1));
+}
+
+
+.size-px (@step:10, @n: 20 , @i: 1) when (@i =< @n) {
+	@size: (@i * @step);
+	.w@{size} {
+		width: unit(@size,px);
+	}
+
+	.h@{size} {
+		height: unit(@size,px);
+	}
+
+	.size-px (@step, @n , (@i + 1));
+}
+
+
+.size-procent;
+.mp-procent;
+.size-px(10,30,1);

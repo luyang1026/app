@@ -1,0 +1,88 @@
+<div class="swalk-notice-list">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="crumb">
+                    业主维护 <span class="crumb-arrow">></span> <span class="second">业主公告</span>
+                </div>
+                <div class="body-head clearfix">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <button type="button" class="btn btn-green btn-add" ng-click="addNotice()">+ 新增</button>
+                        </div>
+                    </div>
+                    <div class="col-md-9 form-horizontal">
+                        <div class="form-group form-inline text-right">
+                            <label>所属</label>
+                            <select ng-model="type" ng-change="getData();" class="form-control" style="margin: 0 15px 0 8px" ng-model="house.property" ng-options="house.id as house.name for house in houses">
+                                <option value="">全部</option>
+                                <!--<option value="hotel">酒店</option>-->
+                                <!--<option value="community">小区</option>-->
+                            </select>
+                            <label>标题名称</label>
+                            <input ng-model="noticeTitle" class="form-control input-inline"
+                                   placeholder="请输入标题名称" enter-search enterfun="getData()" style="margin-left: 8px"/>
+                            <input type="button" class="btn btn-detail" value="查询" ng-click="getData();" style="margin-left: 8px">
+                            <button type="button" class="btn btn-success btn-reset" ng-click="reset()">重置</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-scrollable">
+                    <div class="search-info" ng-if="searchInfo">
+                        以下为关键词“{{searchValBackup}}”的搜索结果
+                    </div>
+                    <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th> 序号 </th>
+                                <th> 标题 </th>
+                                <th> 名称 </th>
+                                <th> 所属 </th>
+                                <th> 时间 </th>
+                                <th> 新闻类型 </th>
+                                <th> 操作 </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="notice in noticeList">
+                                <td ng-bind="$index+1+(paginationConf.currentPage-1)*paginationConf.itemsPerPage">
+                                </td>
+                                <td>
+                                    {{::notice.title}}
+                                </td>
+                                <td>
+                                    {{::notice.houseName}}
+                                </td>
+                                <td>
+                                    {{::notice.propertyName}}
+                                </td>
+                                <td class="center"> 
+                                    {{::notice.date}}
+                                </td>
+                                <td class="center"> 
+                                    {{::notice.categoryName}}
+                                </td>
+                                <td>
+                                    <a class="new-btn new-btn-yellow" ng-click="notice.detail()">详情</a>
+                                    <a class="new-btn new-btn-blue" ng-click="notice.modify()">修改</a>
+                                    <a class="new-btn new-btn-red" ng-click="notice.delete()">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

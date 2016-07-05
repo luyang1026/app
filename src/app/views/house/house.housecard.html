@@ -1,0 +1,137 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">添加图片</label>
+    </div>
+
+</div>
+
+<div class="modal-body form">
+    <div class="form-group">
+        <label class="control-label" style="vertical-align:middle; text-align: center">首页图片(首页展示时显示)</label>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="file-group" style="line-height: 34px">
+                <button class="btn btn-success" ng-disabled="multipleDetailShow">上传图片</button>
+                <span>您已上传{{houseOthers.homepagePicNum}}张图片</span>
+                <!--<span ng-show="!saveSuccess&&saveTotel" style="color: red">请先保存维修信息</span>-->
+                <input type="file" nv-file-select="" uploader="uploader1" ng-show="!multipleDetailShow" ng-disabled="holdDoubleClick"/><br/>
+            </div>
+        </div>
+        <div class="upload-table">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>图片</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="showOldPic1">
+                    <td>
+                        <div class="downloaded-img">
+                        <span nowrap>
+                            <img ng-src="{{houseIndexPic}}">
+                        </span>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr ng-repeat="item in uploader1.queue">
+
+                    <td>
+                        <div class="downloaded-img">
+                            <div ng-show="uploader1.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr/><hr/>
+    <div class="form-group">
+        <label class="control-label" style="vertical-align:middle; text-align: center">详情图片(详情页时显示)</label>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="file-group col-sm-8" style="line-height: 34px">
+                    <button class="btn btn-success" ng-disabled="multipleDetailShow || holdDoubleClick">上传图片</button>
+                    <span>您已上传{{houseOthers.detailPicNum}}张图片</span>
+                    <!--<span ng-show="!saveSuccess&&saveTotel" style="color: red">请先保存维修信息</span>-->
+                    <input type="file" nv-file-select="" uploader="uploader2" ng-show="!multipleDetailShow" multiple/><br/>
+                </div>
+            </div>
+        </div>
+        <div class="upload-table">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>图片</th>
+                    <th>优先级</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="picture in housePic">
+                    <td>
+                        <div class="downloaded-img">
+                        <span nowrap>
+                            <img ng-src="{{picture.path}}">
+                        </span>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" checknub ng-model="picture.priority" class="form-control" ng-disabled="multipleDetailShow" ng-change="changePriority(picture)"/>
+                        <!--<div ng-show="!roomPic.saveSuccess" style="color: green">保存成功!</div>-->
+                        <!--<div ng-show="!roomPic.saveFail" style="color: red">保存失败!</div>-->
+                    </td>
+                    <td>
+                        已上传
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="delete($index, picture)" ng-disabled="multipleDetailShow || holdDoubleClick">
+                            <span class="glyphicon glyphicon-trash"></span> 删除
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-repeat="item in uploader2.queue">
+
+                    <td>
+                        <div class="downloaded-img">
+                            <div ng-show="uploader2.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" checknub ng-model="item.priority" class="form-control"/>
+                    </td>
+
+                    <td class="text-center">
+                        <label style="background:#eba100;">{{isPro}}</label>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> 删除
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal-footer">
+    <!--<span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail" style="color: red">保存失败!!!</span>-->
+    <button type="button" class="btn btn-success btn-modal" ng-click="picSave()" ng-show="!multipleDetailShow || holdDoubleClick">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>

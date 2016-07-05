@@ -1,0 +1,156 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">管家服务详情</label>
+    </div>
+
+</div>
+
+<div class="modal-body form">
+    <form id="butlerForm" name="butlerForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">项目类型</label>
+
+            <div class="col-sm-8" style="vertical-align:middle">
+
+                <select name="housekeeperType" ng-disabled="!isEditor" ng-model="butler.housekeeperType"
+                        class="form-control input-inline"
+                        ng-options="category.id  as category.name for category in categoryList"
+                         required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <span ng-show="!butlerForm.housekeeperType.$valid" style="color:red">请填写项目类型</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">资产名称</label>
+
+            <div  class="col-sm-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="assetSelectize" ng-model="butler.assetId" ng-disabled="!isEditor" placeholder="请输入资产名称" required in-if="!isRead"></select>
+                <span ng-show="!butler.assetId" style="color:red">请填写资产名称</span>
+            </div>
+            <!--<div  ng-if="!isRead" class="col-sm-8" style="vertical-align:middle">-->
+                <!--<input type="text" class="form-control" ng-model="butler.assetName" disabled>-->
+            <!--</div>-->
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">时间</label>
+            <div class="col-sm-8">
+                <input id="datetimez" class="form-control"  size="16" type="text" datepicker-popup="yyyy-MM-dd" ng-model="butler.date" readonly required datetimez ng-disabled="!isEditor"/>
+                <span ng-show="!butler.date" style="color:red">日期格式:yyyy-mm-dd</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">服务人员</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="worker" ng-disabled="!isEditor" ng-model="butler.worker" required/>
+                <span ng-show="!butlerForm.worker.$valid" style="color:red">请填写服务人员</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">检查人</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="checker" ng-disabled="!isEditor" ng-model="butler.checker" required/>
+                <span ng-show="!butlerForm.checker.$valid" style="color:red">请填写检查人</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">时长</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="duration" ng-disabled="!isEditor" ng-model="butler.duration" required ng-pattern="/^\d+(\.\d{1,2})?$/"/>
+                <span ng-show="!butlerForm.duration.$valid" style="color:red">请填写时长(单位为小时，最多输入两位小数)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">检查结果</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="checkResult" ng-disabled="!isEditor" ng-model="butler.checkResult" required />
+                <span ng-show="!butlerForm.checkResult.$valid" style="color:red">请填写检查结果</span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <!--<label class="col-sm-4 control-label" style="margin-left: 10px; vertical-align:middle;text-align: center; width: 20%">添加图标</label>-->
+            <div class="col-sm-12">
+                <div class="row">
+                    <label class="col-sm-3 control-label">添加图片</label>
+                    <div class="file-group" style="left: 15px">
+                        <button class="btn btn-success" ng-disabled="detailShow">上传图片</button>
+                        <span>您已上传{{picLength}}张图片,图片尺寸324*136,图片小于500k</span>
+                        <input type="file" nv-file-select="" uploader="uploader2" ng-disabled="detailShow || holdDoubleClick" multiple/><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-table">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>图片</th>
+                        <th>优先级</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="picture in pictureUrlList">
+                        <td>
+                            <div class="downloaded-img">
+                                <span nowrap>
+                                    <img ng-src="{{picture.path}}">
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" checknub ng-model="picture.priority" class="form-control" ng-disabled="detailShow" ng-change="changePriority(picture)"/>
+                        </td>
+                        <td>
+                            已上传
+                        </td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="delete($index, picture)" ng-disabled="detailShow || holdDoubleClick">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in uploader2.queue">
+
+                        <td>
+                            <div class="downloaded-img">
+                                <div ng-show="uploader2.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" checknub ng-model="item.priority" class="form-control"/>
+                        </td>
+
+                        <td class="text-center">
+                            <label style="background:#eba100;">{{item.isPro}}</label>
+                        </td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button ng-show="isEditor" type="button" class="btn btn-success btn-modal" ng-click="assign()"
+            ng-disabled="butlerForm.$invalid || holdDoubleClick" >确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>
+
+
+
+

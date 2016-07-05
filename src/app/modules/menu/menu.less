@@ -1,0 +1,67 @@
+.page-sidebar-menu{
+  a{
+    display: block;
+    color: @menu-font-color;
+    font-size: 15px;
+  }
+  >li{
+    position: relative;
+    &.active{
+      .glyphicon-menu-down{
+        display: block;
+      }
+      .glyphicon-menu-right{
+        display: none;
+      }
+      ul{
+        display: block;
+        a{
+          cursor: pointer;
+        }
+      }
+    }
+    .glyphicon-menu-down{
+      display: none;
+    }
+    .glyphicon-menu-right{
+        
+    }
+    ul{
+      padding-bottom: 15px;
+      display: none;
+    }
+    >a{
+      height: 60px;
+      line-height: 59px;
+      overflow: hidden;
+      padding-left: 17px;
+      text-decoration: none;
+      i{
+        padding-right: 16px;
+        display: inline-block;
+        font-size: 20px;
+      }
+    }
+    .glyphicon{
+      position: absolute;
+      top: 24px;
+      right: 20px;
+    }
+  }
+  >li:hover,li.active{
+    background-color: @menu-hover-bg-color;
+    >a{
+      color: #fff;
+    }
+  }
+  >li li{
+    a{
+      line-height: 30px;
+      height: 30px;
+      overflow: hidden;
+      font-size: 12px;
+      color: #fff;
+      padding-left: 59px;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<div class="assetInfo">
+    <!-- END PAGE BREADCRUMB -->
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div>
+                        <div class="crumb">
+                            业主维护 <span class="crumb-arrow">></span> <span class="second">资产明细</span>
+                        </div>
+                    </div>
+                    <div class="body-head clearfix">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <button type="button" class="btn btn-green btn-add" ng-click="add()" style="margin-right: 10px;">+ 新增</button>
+                                <button down-file="{{excelExportUrl}}" down-file-type="xlsx" class="btn btn-green btn-add" data-name="资产明细.xls">导出</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row text-right">
+                                <div class="form-group form-inline">
+                                    <select class="form-control" ng-options="house.id as house.name for house in houses" ng-model="propertyType">
+                                        <option value="">全部</option>
+                                    </select>
+                                    <input id="assetName" class="form-control input-inline" ng-model="assetCandition"
+                                           placeholder="请输入资产名称、编号或所有人名称" enter-search enterfun="getData()" style="padding: 8px 10px;margin-left: 8px;width: 246px"/>
+                                    <input type="button" class="btn btn-detail" value="查询" ng-click="getData();" style="margin-left: 8px">
+                                    <button type="button" class="btn btn-success btn-reset" ng-click="reset()">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <div class="search-info" ng-if="searchInfo">
+                            以下为关键词“{{searchValBackup}}”的搜索结果
+                        </div>
+                        <table class="table table-bordered table-checkable table1 table-new"
+                               id="sample_1">
+                            <thead>
+                            <tr>
+                                <th>资产编号/资产名称</th>
+                                <th>资产所有人</th>
+                                <th>地址</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="assetInfo in assetInfoList">
+                                <td>
+                                    {{::assetInfo.assetNo}}/{{::assetInfo.assetName}}
+                                </td>
+                                <td class="center">
+                                    {{::assetInfo.userName}}
+                                </td>
+                                <td class="center">
+                                    {{::assetInfo.address}}
+                                </td>
+                                <td>
+                                    <a class="new-btn new-btn-yellow" ng-click="assetInfo.detail(0)">详情</a>
+                                    <a class="new-btn new-btn-blue" ng-click="assetInfo.detail(1)">修改</a>
+                                    <a class="new-btn new-btn-red" ng-click="assetInfo.delete()">删除</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

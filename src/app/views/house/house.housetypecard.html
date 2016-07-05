@@ -1,0 +1,154 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">房型信息</label>
+    </div>
+</div>
+
+<div class="modal-body form">
+    <div class="col-md-12 margin-bottom">
+        <div class="row">
+            <form id="houseTypeForm" name="houseTypeForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">产品名称</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="room.data.name" ng-disabled="!isRead" placeholder="例:海景大床房" required/>
+                        <div ng-show="!room.data.name" style="color: red">请填写名称</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">房型</label>
+                    <div class="col-md-8">
+                        <select ng-model="room.houseTypeEntity" class="form-control input-inline"
+                                ng-options="houseTypeEntity.name for houseTypeEntity in lists.houseTypeList" ng-disabled="!isRead" required>
+                            <option value="">- 选择 -</option>
+                        </select>
+                        <div ng-show="!room.houseTypeEntity" style="color: red">请选择房型</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">面积(平方米)</label>
+                    <div class="col-md-8">
+                        <input type="number" ng-model="room.data.area" class="form-control" ng-disabled="!isRead" required checknub/>
+                        <div ng-show="!room.data.area" style="color: red">请填写面积</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">床位</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="room.data.bed" class="form-control" ng-disabled="!isRead" required checknub/>
+                        <div ng-show="!room.data.bed" style="color: red">请填写床位</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" style="margin-top: 3px">设施</label>
+                    <div class="col-md-8 text-left">
+                        <span ng-repeat="roomDevice in lists.houseTypeDeviceList">
+                            <label class="control-label" style="margin-right: 15px" ng-click="roomDevice.deviceClick()">
+                                <span>{{roomDevice.name}}</span>
+                                <input type="checkbox" ng-model="roomDevice.selected" ng-disabled="!isRead" class="sxtx-checkbox"/>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3" style="margin-top: 3px">服务</label>
+                    <div class="col-md-8 text-left">
+                    <span ng-repeat="roomService in lists.houseTypeServiceList">
+                        <label class="control-label" ng-click="roomService.serviceClick()"  style="margin-right: 15px"><span>{{roomService.name}}</span><input type="checkbox" ng-model="roomService.selected" class="sxtx-checkbox" ng-disabled="!isRead"></label>
+                    </span>
+                    </div>
+                </div>
+<!--                <div class="form-group">
+                    <label class="control-label col-md-3" style="margin-top: 3px">早餐</label>
+                    <div class="col-md-8 text-left">
+                    <span>
+                        <label class="control-label"  style="margin-right: 15px"><span>选项1</span><input type="radio" name="radio" class="sxtx-checkbox" ng-disabled="!isRead"></label>
+                        <label class="control-label"  style="margin-right: 15px"><span>选项2</span><input type="radio" name="radio" class="sxtx-checkbox" ng-disabled="!isRead"></label>
+                        <label class="control-label"  style="margin-right: 15px"><span>选项3</span><input type="radio" name="radio" class="sxtx-checkbox" ng-disabled="!isRead"></label>
+                    </span>
+                    </div>
+                </div>-->
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-12">
+        <div class="row">
+            <label class="control-label col-sm-2" style="line-height: 34px">房型图片</label>
+            <div class="file-group col-sm-10" style="line-height: 34px">
+                <button class="btn btn-success" ng-show="isRead" ng-disabled="room.selectPicAble || holdDoubleClick">上传图片</button>
+                <span>您已上传{{houseTypeLength}}张图片,图片尺寸750*460,图片小于500k</span>
+                <!--<span ng-show="!saveSuccess&&saveTotel" style="color: red">请先保存维修信息</span>-->
+                <input type="file" nv-file-select="" uploader="uploader0" ng-show="isRead" ng-disabled="room.selectPicAble" multiple/><br/>
+            </div>
+        </div>
+    </div>
+    <div class="upload-table">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>图片</th>
+                <th>优先级</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="picture in pictureUrlList">
+                <td>
+                    <div class="downloaded-img">
+                        <span nowrap>
+                            <img ng-src="{{picture.path}}">
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" checknub ng-model="picture.priority" class="form-control" ng-disabled="!isRead" ng-change="changePriority(picture)"/>
+                </td>
+                <td>
+                    已上传
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="delete($index, picture)" ng-disabled="!isRead || holdDoubleClick">
+                        <span class="glyphicon glyphicon-trash"></span> 删除
+                    </button>
+                </td>
+            </tr>
+            <tr ng-repeat="item in uploader0.queue">
+
+                <td>
+                    <div class="downloaded-img">
+                        <div ng-show="uploader0.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" checknub ng-model="item.priority" class="form-control"/>
+                </td>
+
+                <td class="text-center">
+                    <label style="background:#eba100;">{{item.isPro}}</label>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> 删除
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <!--<span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail" style="color: red">保存失败!!!</span>-->
+    <button type="button" class="btn btn-success btn-modal" ng-click="saveRoomtype()" ng-disabled="!isRead || holdDoubleClick">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>

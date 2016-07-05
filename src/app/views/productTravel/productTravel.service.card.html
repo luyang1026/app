@@ -1,0 +1,51 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">商户信息</label>
+    </div>
+</div>
+
+<div class="modal-body form">
+    <div class="col-md-12">
+        <div class="row">
+            <form id="addServiceForm" name="addServiceForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">供应商</label>
+                    <div class="col-md-8">
+                        <select id="nameSearch" ng-model="service.providerId"  placeholder="请输入资产名称" required></select>
+
+                        <!--<input type="text" class="form-control" ng-model="service.providerName" required/>-->
+                        <div ng-show="!service.providerId" class="color-red">请填写供应商</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">服务</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="service.service" class="form-control" required/>
+                        <div ng-show="!service.service" class="color-red">请填写服务</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">价格</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="service.price" class="form-control" required ng-pattern="/^([1-9]\d*|0)(\.\d{2})?$/"/>
+                        <div ng-show="!service.price" class="color-red">请填写价格(必须为数字，并精确到小数点后两位！)</div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-footer">
+    <span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail" style="color: red">保存失败!!!</span>
+    <button type="button" class="btn btn-success btn-modal" ng-click="saveService()" ng-disabled="!addServiceForm.$valid || holdDoubleClick">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>

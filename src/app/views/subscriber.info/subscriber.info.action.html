@@ -1,0 +1,407 @@
+<form name="newMerch" class="form-horizontal subscriber-action-form" style="margin-top:30px" ng-class="{oncheck:oncheck}">
+	<uib-tabset active="0">
+		<uib-tab heading="基本信息" index="0">
+			<div class="tab-item" ng-form="baseInfo">	
+			    <div class="row" style="padding-top:20px">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-name" class="col-md-4 control-label">商户名称</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-name" class="form-control"  ng-model="formModel.merchName" required>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-id" class="col-md-4 control-label">商户编号</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-id" class="form-control" disabled ng-model="formModel.merchId" >
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-short" class="col-md-4 control-label">商户简称</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-short" class="form-control" ng-model="formModel.merchShort" required>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-linkMan" class="col-md-4 control-label">联系人</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-linkMan" class="form-control" ng-model="formModel.linkMan" required>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-linkTel" class="col-md-4 control-label">手机</label>
+			                <div class="col-md-8">
+			                   <input type="text" id="subscriber-linkTel" class="form-control" ng-model="formModel.linkTel" required>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-email" class="col-md-4 control-label">电子邮件</label>
+			                <div class="col-md-8">
+			                	<input type="text" id="subscriber-email" class="form-control" ng-model="formModel.email" required>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-level" class="col-md-4 control-label">等级</label>
+			                 <div class="col-md-8">
+			                    <select name="" id="subscriber-level" class="form-control" ng-model="formModel.level" required>
+			                        <option value="0">初级</option>
+			                        <option value="1">中级</option>
+			                        <option value="2">高级</option>
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-channel-id" class="control-label col-md-4">渠道类型</label>
+			                <div class="col-md-4">
+			                    <select name="" id="subscriber-channel-id" class="form-control" ng-model="formModel.channelId" required>
+			                        <option value="1001">米饭公社</option>
+			                        <option value="1002">盛行天下</option>
+			                    </select>
+			                </div>
+			                <div class="col-md-4">
+			                    <select name="" id="subscriber-merchType" class="form-control" ng-model="formModel.merchType" required>
+			                        <option value="A">房地产商</option>
+			                        <option value="B">酒店</option>
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-address" class="col-md-4 control-label">联系地址</label>
+			                <div class="col-md-8">
+			                	<input type="text" class="form-control" id="subscriber-address" ng-model="formModel.address" required>
+			                </div>
+			            </div>
+			        </div>        
+			    </div>
+			    <div class="row">
+			    	<div class="col-md-4">
+			    		<div class="form-group">
+				    		<label for="" class="col-md-4 control-label">商户简介</label>
+							<div class="col-md-8">
+								<textarea name="" id="" rows="3" class="form-control" ng-model="formModel.merchIntro" required></textarea>{{formModel.merchIntro}}
+							</div>
+			    		</div>
+			    	</div>
+			    </div>
+			    <div class="row text-center tab-item-save">
+					<button type="button" class="btn btn-success" ng-click="action.onSave('baseInfo')">保存</button>
+			    </div>
+		    </div>
+		</uib-tab>
+		<uib-tab heading="结算信息" index="1">
+			<div class="tab-item">
+			    <div class="row"  style="padding-top:20px">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-accountName" class="col-md-4 control-label">结算账户名</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-accountName" class="form-control" ng-model="formModel.accountName" required>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-bankName" class="col-md-4 control-label">银行名称</label>
+			                <div class="col-md-8">
+			                     <select name="" id="subscriber-bankName" class="form-control" ng-model="formModel.bankName" required>
+			                        <option value="中国银行">中国银行</option>
+			                        <option value="中国农业银行">中国农业银行</option>
+			                        <option value="中国工商银行">中国工商银行</option>
+			                        <option value="中国建设银行">中国建设银行</option>
+			                        <option value="中国交通银行">中国交通银行</option>
+			                        <option value="中国招商银行">中国招商银行</option>
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-bankFirm" class="col-md-4 control-label">联行号</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-bankFirm" class="form-control" ng-model="formModel.bankFirm">
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-branchName" class="col-md-4 control-label">支行名称</label>
+			                <div class="col-md-8">
+			                    <input type="text" id="subscriber-branchName" class="form-control" ng-model="formModel.branchName">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-bankAccount" class="col-md-4 control-label">结算账号</label>
+			                <div class="col-md-8">
+			                    <input type="text" class="form-control" id="subscriber-bankAccount" ng-model="formModel.bankAccount">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-fixedAmount" class="col-md-4 control-label">固定额度</label>
+			                <div class="col-md-8">
+			                    <input type="text" class="form-control" id="subscriber-fixedAmount" ng-model="formModel.fixedAmount">
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-invoiceRate" class="col-md-4 control-label">发票开具频率</label>
+			                <div class="col-md-8">
+			                	<select name="" class="form-control" id="subscriber-invoiceRate">
+			                		<option value="0">无需开具发票</option>
+			                		<option value="1">月</option>
+			                		<option value="2">季度</option>
+			                		<option value="3">年</option>
+			                	</select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-chargeType" class="col-md-4 control-label">计费类型</label>
+			                <div class="col-md-8">
+				                <select name="" class="form-control" id="subscriber-chargeType">
+			                		<option value="1">标准计费</option>
+			                	</select>	                	
+			                </div>
+			            </div>
+			        </div>
+			       <div class="col-md-4">
+			           <div class="form-group">
+			               <label for="subscriber-channel-id" class="control-label col-md-4">计费方式</label>
+			               <div class="col-md-8">
+			                   <select name="" id="subscriber-channel-id" class="form-control" ng-model="formModel.channelId" required>
+			                       <option value="0">比率</option>
+			                       <option value="1">固定额度</option>
+			                   </select>
+			               </div>
+			           </div>
+			       </div> 
+			    </div>
+			    <div class="row">
+			        <div class="col-md-4">
+			            <div class="form-group">
+			                <label for="subscriber-needStatement" class="col-md-4 control-label">是否需要对账单</label>
+			                <div class="col-md-8">
+			                    <select name="" id="subscriber-needStatement" class="form-control">
+			                        <option value="0">否</option>
+			                        <option value="1">是</option>
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+				<div class="row text-center tab-item-save">
+					<button type="button" class="btn btn-success">保存</button>
+			    </div>
+			</div>
+		</uib-tab>
+		<uib-tab heading="资质信息" index="2">
+			<div class="tab-item">
+				<div class="row" style="padding-top:20px">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">法人代表姓名</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">法人证件类型</label>
+							<div class="col-md-8">
+								<select name="" id="" class="form-control">
+									<option value="">身份证</option>
+									<option value="">驾驶证</option>
+									<option value="">军官证</option>
+									<option value="">护照</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">公司名称</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">法人证件号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">注册登记号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">组织机构代码证号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">注册地址</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">税务登记证号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">注册资本</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">开户许可证号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">实收资本</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">ICP证编号</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">公司类型</label>
+							<div class="col-md-8">
+								<select name="" id="" class="form-control">
+									<option value="">有限责任公司</option>
+									<option value="">无限责任公司</option>
+									<option value="">股份有限公司</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">成立日期</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="col-md-4 control-label">营业期限</label>
+							<div class="col-md-8">
+								<div class="form-group">
+									<div class="col-md-5">
+										<input type="text" class="form-control">
+									</div>
+									<div class="col-md-2">
+										<span class="text-control">至</span>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="control-label col-md-4">商户到期日期</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="" class="control-label col-md-4">备注</label>
+							<div class="col-md-8">
+								<textarea class="form-control" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center">
+					 <div class="row text-center tab-item-save">
+						<button type="button" class="btn btn-success">保存</button>
+				    </div>
+				</div>
+			</div>
+		</uib-tab>
+	</uib-tabset>
+</form>
+<div class="row text-center subscriber-action-footer" style="margin-top:30px">
+	<button class="btn btn-warning">提交审核</button>
+	<button class="btn btn-primary" ui-sref="^">返回</button>
+</div>

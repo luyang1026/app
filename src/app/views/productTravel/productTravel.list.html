@@ -1,0 +1,65 @@
+<div class="swalk-product-travel-list">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 portlet-body">
+                <div class="row">
+                    <div>
+                        <div class="crumb">
+                            度假管理 <span class="crumb-arrow">></span> <span class="second">产品发布</span>
+                        </div>
+                    </div>
+                    <div class="body-head">
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <button type="button" class="btn btn-green btn-add" ng-click="add()">+ 新增</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="form-group form-inline text-right">
+                                    <label>产品名称</label>
+                                    <input ng-model="searchVal" class="form-control input-inline" enter-search enterfun="search()" style="padding: 8px 10px;margin-left: 8px" placeholder="请输入产品名称"/>
+                                    <input type="button" class="btn btn-detail" value="查询" ng-click="search();" style="margin-left: 8px">
+                                    <button type="button" class="btn btn-success btn-reset" ng-click="reset()">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <div class="search-info" ng-if="searchInfo">
+                            以下为关键词“{{searchValBackup}}”的搜索结果
+                        </div>
+                        <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                            <thead>
+                            <tr>
+                                <th>产品名称</th>
+                                <th>目的地</th>
+                                <th>产品状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in sellerProductList">
+                                <td>{{::product.name}}</td>
+                                <td>{{::product.cityName}}</td>
+                                <td>
+                                    {{product.status}}
+                                </td>
+                                <td>
+                                    <a class="new-btn new-btn-yellow" ng-click="product.detail()">详情</a>
+                                    <a class="new-btn new-btn-detail" ng-click="product.push()" ng-if="product.releaseStatus != 1">上架</a>
+                                    <a class="new-btn" ng-click="product.pull()" ng-if="product.releaseStatus == 1">下架</a>
+                                    <a class="new-btn new-btn-blue" ng-click="product.modify()" ng-if="product.releaseStatus != 1">修改</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

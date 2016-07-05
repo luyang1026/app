@@ -1,0 +1,211 @@
+<div class="swalk-house-info">
+    <div class="house-info">
+        <div>
+            <div class="crumb" style="padding-bottom: 0">
+                酒店管理 <span class="crumb-arrow">></span> <span ui-sref="user({menu: 'house',submenu: 'list'})" style="cursor: pointer">房源维护</span> <span class="crumb-arrow">></span> <span class="second">基本信息</span>
+            </div>
+        </div>
+        <form id="houseForm" name="houseForm" novalid>
+            <div class="house-info-top" style="padding-top: 0;">
+                <div class="house-h4">信息</div>
+                <div class="house-panel clearfix">
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">名称</div>
+                        <div class="house-panel-input">
+                            <input type="text" name="name" ng-model="house.name" ng-disabled="!infoPage.ableEdit" class="form-control" required placeholder="请填写市-酒店/小区/公寓/会所等全称"/>
+                            <!--<div ng-show="!house.name" style="color:red">请填写名称</div>-->
+                        </div>
+                    </div>
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">物业类型</div>
+                        <div class="house-panel-input">
+                            <select class="form-control" ng-model="house.property" ng-options="house.id as house.name for house in houses" ng-disabled="!infoPage.ableEdit" required>
+                                <option value="">-- 请选择类型 --</option>
+                            </select>
+                            <!--<div ng-show="!house.property" style="color:red">请选择所在城市</div>-->
+                        </div>
+                    </div>
+
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">所在城市</div>
+                        <div class="house-panel-input">
+                            <select id="cityId" class="form-control input-xs input-sm" ng-model="house.cityId"
+                                    ng-options="city.id as city.name for city in cities"  style="width: 100%" ng-disabled="!infoPage.ableEdit" required>
+                                <option value="">-- 请选择城市 --</option>
+                            </select>
+                            <!--<div ng-show="!house.cityId" style="color:red">请选择所在城市</div>-->
+                        </div>
+                    </div>
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">地址</div>
+                        <div class="house-panel-input">
+                            <input type="text" class="form-control" placeholder="请填写房源地址" name="address" ng-model="house.address" ng-disabled="!infoPage.ableEdit" required/>
+                            <!--<div ng-show="!house.address" style="color:red">请填写地址</div>-->
+                        </div>
+                    </div>
+
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">经度</div>
+                        <div class="house-panel-input">
+                            <input type="text" class="form-control" placeholder="请填写经度" ng-model="house.longitude" ng-disabled="!infoPage.ableEdit" required onkeyup="value=value.replace(/[^\-?\d.]/g,'')"/>
+                            <!--<div ng-show="!house.address" style="color:red">经度</div>-->
+                        </div>
+                    </div>
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">纬度</div>
+                        <div class="house-panel-input">
+                            <input type="text" class="form-control" placeholder="请填写纬度" name="" ng-model="house.latitude" ng-disabled="!infoPage.ableEdit" required onkeyup="value=value.replace(/[^\-?\d.]/g,'')"/>
+                            <!--<div ng-show="!house.address" style="color:red">纬度</div>-->
+                        </div>
+                    </div>
+
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">电话</div>
+                        <div class="house-panel-input">
+                            <input type="text" class="form-control" placeholder="请填写前台/客服电话" name="telephone" ng-model="house.telephone" ng-disabled="!infoPage.ableEdit" required  ng-pattern="/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/"/>
+                            <!--<div ng-show="!house.telephone && house.telephone != ''" style="color:red">请填写正确的电话</div>-->
+                        </div>
+                    </div>
+                    <div class="house-panel-form-group">
+                        <!--<div class="house-panel-label text-right">服务</div>-->
+                        <!--<div class="house-panel-input">-->
+                            <!--<input type="text" class="form-control" placeholder="请填写服务" name="service" ng-model="house.service" ng-disabled="!infoPage.ableEdit" required/>-->
+                            <!--&lt;!&ndash;<div ng-show="!house.service" style="color:red">请填写服务</div>&ndash;&gt;-->
+                        <!--</div>-->
+                    </div>
+
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">介绍</div>
+                        <div class="house-panel-input" style="width: 75%">
+                            <textarea ng-model="house.content" class="form-control" placeholder="请填写介绍" ng-disabled="!infoPage.ableEdit" style="width: 100%;height: 100px" required></textarea>
+                            <!--<div ng-show="!house.content" style="color:red">请填写介绍</div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="house-panel-save">
+                    <button class="btn btn-detail" ng-click="saveHouse()" ng-disabled="infoPage.ableSaveMessage">点击保存信息</button>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="house-info-mid clearfix" ng-if="false">
+                <div class="house-h5">{{infoPage.wordInfoPage}}图片</div>
+                <div class="house-panel-form-group">
+                    <div class="house-panel-label text-right">{{infoPage.wordInfoPage}}图片</div>
+                    <div class="house-panel-input" style="width: 75%">
+                        <button type="button" class="btn btn-success" ng-click="addHousePic(house,houseOthers)" ng-disabled="!infoPage.ableSaveSuccess">{{infoPage.wordInfoPage}}图片</button>
+                        <span style="vertical-align:middle;color: #999">
+                            首页图片: {{houseOthers.homepagePicNum}} 张&nbsp&nbsp&nbsp详情图片: {{houseOthers.detailPicNum}} 张
+                        </span>
+                        <!--<div ng-show="!infoPage.ableSaveSuccess" style="color: red">请先保存信息!!!</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="house-info-bottom clearfix">
+                <div class="house-h5">房型</div>
+                <div class="house-panel-form-group">
+                    <div class="house-panel-label text-right">添加房型</div>
+                    <div class="house-panel-input" style="width: 75%">
+                        <button type="button" class="btn btn-success" ng-click="addRoom()" ng-disabled="!infoPage.ableSaveSuccess||!infoPage.ableEdit">添加房型</button>
+                        <!--<div ng-show="!infoPage.ableSaveSuccess" style="color: red">请先保存信息!!!</div>-->
+                    </div>
+                </div>
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-checkable table1 table-new" id="sample_2">
+                        <thead>
+                        <tr>
+                            <th> 序号 </th>
+                            <th> 产品名称 </th>
+                            <th> 房型 </th>
+                            <th> 面积<br/>(平方米) </th>
+                            <th> 床位 </th>
+                            <th> 设施 </th>
+                            <th> 服务 </th>
+                            <th> 图片 </th>
+                            <th> 操作 </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="room in roomList">
+                            <td ng-bind="$index+1" style="text-align:center;vertical-align:middle">
+                            </td>
+                            <td style="text-align:center;vertical-align:middle">
+                                {{room.data.name}}
+                            </td>
+                            <td style="vertical-align:middle">
+                                {{room.houseTypeEntity.name}}
+                            </td>
+                            <td style="vertical-align:middle">
+                                {{room.data.area}}
+                            </td>
+                            <td style="vertical-align:middle">
+                                {{room.data.bed}}
+                            </td>
+                            <td>
+                                <span ng-repeat="device in room.data.devices">{{device.name}}&nbsp</span>
+                            </td>
+                            <td>
+                                <span ng-repeat="service in room.data.services">{{service.name}}&nbsp</span>
+                            </td>
+                            <td>
+                                {{room.roomPicNum}} 张
+                            </td>
+                            <td style="text-align:center;vertical-align:middle">
+                                <a class="new-btn new-btn-yellow" ng-click="room.modify(room,lists)"> {{infoPage.wordRoomButton}}</a>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="house-info-bottom clearfix">
+                <div class="house-h5">服务</div>
+                <div class="house-panel-form-group">
+                    <div class="house-panel-label text-right">添加服务</div>
+                    <div class="house-panel-input" style="width: 75%">
+                        <button type="button" class="btn btn-success" ng-click="addService()" ng-disabled="!infoPage.ableSaveSuccess||!infoPage.ableEdit">添加服务</button>
+                        <!--<div ng-show="!infoPage.ableSaveSuccess" style="color: red">请先保存信息!!!</div>-->
+                    </div>
+                </div>
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-checkable table1 table-new" id="sample_3">
+                        <thead>
+                        <tr>
+                            <th> 序号 </th>
+                            <th> 服务名称 </th>
+                            <th> 服务价格 </th>
+                            <th> 操作 </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="service in othersServices">
+                            <td ng-bind="$index+1" style="text-align:center;vertical-align:middle">
+                            </td>
+                            <td style="text-align:center;vertical-align:middle">
+                                <select name="service" ng-model="service.serviceType" class="show-tick form-control input-xs input-sm input-inline"
+                                        ng-options="othersService.name for othersService in othersServiceList" ng-change="service.change('name')" ng-disabled="!infoPage.ableEdit">
+                                    <option value="">-- 请选择服务 --</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="servicePrice" ng-model="service.houseRelation.pcPrice" ng-disabled="!infoPage.ableEdit" ng-change="service.change('price')"/>
+                            </td>
+                            <td style="text-align:center;vertical-align:middle">
+                                <a class="new-btn new-btn-detail" ng-show="service.serviceSave&&infoPage.ableEdit"> 已保存 </a>
+                                <a class="new-btn new-btn-red" ng-click="service.save()"  ng-show="!service.serviceSave&&infoPage.ableEdit"> 请保存 </a>
+                                <a class="new-btn new-btn-red" ng-click="service.delete($index)"> 删除 </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+

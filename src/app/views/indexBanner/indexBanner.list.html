@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 portlet-body">
+            <div class="row">
+                <div>
+                    <div class="crumb">
+                        数据维护 <span class="crumb-arrow">></span> <span class="second">首页管理</span>
+                    </div>
+                </div>
+                <div class="body-head">
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="file-group">
+                                <button type="button" class="btn btn-green btn-add">+ 新增图片</button>
+                                <span>您已上传{{picLength}}张图片</span>
+                                <input type="file" nv-file-select="" uploader="uploader2" ng-disabled="detailShow || holdDoubleClick" multiple/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                        <thead>
+                        <tr>
+                            <th width="290">图片</th>
+                            <th width="190">优先级</th>
+                            <th>链接</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pic in pictureUrlList">
+                            <td>
+                                <div class="downloaded-img">
+                                    <img ng-src="{{pic.path}}">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" checknub class="form-control" ng-model="pic.priority" ng-change="changePriority(pic)" style="width: 120px"/>
+                            </td>
+                            <td><input type="text" class="form-control" ng-model="pic.linkedPath" ng-change="changePriority(pic)"/> </td>
+                            <td>{{pic.msg}}</td>
+                            <td>
+                                <a class="new-btn new-btn-red" ng-click="pic.delete($index,pic)" ng-if="!holdDoubleClick">删除</a>
+                                <a class="new-btn new-btn-red" style="cursor: not-allowed" ng-if="holdDoubleClick">删除</a>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in uploader2.queue">
+                            <td>
+                                <div class="downloaded-img">
+                                    <div ng-show="uploader2.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="item.priority" class="form-control"  style="width: 120px"/>
+                            </td>
+                            <td><input type="text" class="form-control" ng-model="item.link"/> </td>
+                            <td class="text-center">
+                                <span style="color: red">{{item.isPro}}</span>
+                            </td>
+                            <td nowrap>
+                                <a class="new-btn new-btn-red" ng-click="item.remove()">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 text-right" style="padding-bottom: 80px;">
+                    <span ng-show="uploader2.queue.length > 0 || changedPriority.length > 0" style="color: red;margin-right: 15px">请保存</span>
+                    <button ng-click="saveFun()" class="btn btn-green btn-add" ng-disabled="!uploader2.queue.length && !changedPriority.length">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

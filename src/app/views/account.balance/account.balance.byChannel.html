@@ -1,0 +1,125 @@
+<div class="swalk-category-list container-fluid">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="crumb">
+                    对账结算 <span class="crumb-arrow">></span> <span class="second">渠道对账</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-id" class="col-md-4 control-label">账单号</label>
+                    <div class="col-md-8">
+                        <input type="text" id="subscriber-id" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-name" class="col-md-4 control-label">支付渠道类型</label>
+                    <div class="col-md-8">
+                        <select name=" id="" class="form-control">
+                            <option>微信公众号</option>
+                            <option>微信app支付</option>
+                            <option>支付宝移动支付</option>
+                            <option>荣盛币支付</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-type" class="col-md-4 control-label">类型</label>
+                    <div class="col-md-8">
+                        <select name="" id="subscriber-type" class="form-control">
+                            <option value="personal">个人</option>
+                            <option value="organization">机构</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-contractId" class="col-md-4 control-label">开始时间</label>
+                    <div class="col-md-8">
+                        <input type="text" my-date-picker id="subscriber-contractId" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-contractId" class="col-md-4 control-label">结束时间</label>
+                    <div class="col-md-8">
+                        <input type="text" my-date-picker id="subscriber-contractId" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-channel-type" class="col-md-4 control-label">渠道类型</label>
+                    <div class="col-md-8">
+                        <select name="" id="subscriber-channel-type" class="form-control">
+                            <option value="personal">米饭公社</option>
+                            <option value="organization">盛行天下</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px">
+            <div class="col-md-1">
+                <button class="btn btn-success btn-add">批量下载</button>
+            </div>
+            <div class="col-md-3 col-md-offset-8 text-justify">
+                <button class="btn btn-detail">查询</button>
+                <button class="btn btn-success btn-reset">重置</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-hover" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>对账日期</th>
+                <th>支付渠道类型</th>
+                <th>账单号</th>
+                <th>渠道类型</th>
+                <th>总交易笔数</th>
+                <th>总金额</th>
+                <th>手续费</th>
+                <th>净额</th>
+                <th>对账状态</th>
+                <th>对账差错笔数</th>
+                <th>账单详情</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>aaa</td>
+                <td>
+                    <button class="btn btn-link btn-xs" ui-sref="forum.main.account.balance.detail">明细</button>
+                    <button class="btn btn-link btn-xs">下载</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row text-center">
+        <uib-pagination total-items="100" ng-model="currentPage" previous-text="上一页" next-text="下一页"></uib-pagination>    
+    </div>
+</div>

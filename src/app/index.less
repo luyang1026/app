@@ -1,0 +1,532 @@
+/**
+ *  Do not remove this comments bellow. It's the markers used by wiredep to inject
+ *  less dependencies when defined in the bower.json of your dependencies
+ */
+// bower:less
+// endbower
+//
+body,html{
+  height: 100%;
+}
+.mainview{
+  height: 100%;
+}
+.view-main{
+  height: 100%;
+}
+.ly-content{
+  position: absolute;
+  top: 72px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.h100percent{
+  height: 100%;
+}
+.main-content{
+  padding: 0 2%;
+}
+.my-view-animate.ng-enter{
+  transition:all linear .15s;
+  opacity:0;
+}
+.my-view-animate.ng-enter.ng-enter-active{
+  opacity: 1;
+}
+form input.ng-invalid-pattern{
+  border-color: #E96666;
+  &:focus{
+    border-color: #E96666;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233 , 102, 102, 0.6);
+  }
+}
+form.oncheck .ng-invalid{
+  border-color: #E96666;
+  &:focus{
+    border-color: #E96666;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233 , 102, 102, 0.6);
+  }
+}
+
+.row button+button{margin-left: 15px;}
+textarea{resize:none;}
+.form-group .text-control{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+}
+th{
+  text-align: center;
+}
+.modal .modal-dialog{
+  margin:200px auto;
+}
+//
+@icon-font-path: '../../bower_components/bootstrap/fonts/';
+@font-face {font-family: 'iconfont';
+  src: url('../app/iconfont/iconfont.eot'); /* IE9*/
+  src: url('../app/iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../app/iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+  url('../app/iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../app/iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+@font-face {font-family: 'iconfont-sec';
+  src: url('../app/iconfont/iconfont-sec.eot'); /* IE9*/
+  src: url('../app/iconfont/iconfont-sec.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../app/iconfont/iconfont-sec.woff') format('woff'), /* chrome、firefox */
+  url('../app/iconfont/iconfont-sec.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../app/iconfont/iconfont-sec.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
+.iconfont-sec{
+  font-family:"iconfont-sec" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
+.icon-jiudian:before { content: "\e628"; }
+.icon-home:before { content: "\e602"; }
+.icon-fabu:before { content: "\e600"; }
+.icon-fabushijian:before { content: "\e704"; }
+.icon-guanli:before { content: "\e613"; }
+.icon-weibiaoti1:before { content: "\e624"; }
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your less files automatically
+ */
+// injector
+// endinjector
+
+@bg-color: #1e8cd4;
+@font-color-gray: #929292;
+@bg-gray: #f5f5f5;
+
+@logo-bg-color: #354556;
+@head-bg-color: #d6dde4;
+@menu-bg-color: #4c5e70;
+@menu-hover-bg-color: #3d4f60;
+@menu-font-color: #c4ccd3;
+@left-width: 250px;
+.full-width-height {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+//page
+@page-border: #ddd;
+@page-font: #49abfc;
+@page-arrow: #1ac2ff;
+@page-disabled-bg: #f9f9f9;
+@page-disabled-font-color: #999;
+.page-list {
+  float: right;
+  .pagination {
+    float: left;
+    margin: 10px 0;
+    > li {
+      > a,
+      > span {
+        color: @page-font;
+        background-color: #fff;
+        border: 1px solid @page-border;
+        margin-left: 10px;
+      }
+      &:first-child {
+        > a,
+        > span {
+          //color: @page-arrow;
+        }
+      }
+      &:last-child {
+        > a,
+        > span {
+          //color: @page-arrow;
+        }
+      }
+    }
+
+
+    > .disabled ,
+    > .active {
+      > span,
+      > span:hover,
+      > span:focus,
+      > a,
+      > a:hover,
+      > a:focus {
+        color: @page-disabled-font-color;
+        background-color: @page-disabled-bg;
+        border-color: @page-border;
+      }
+    }
+  }
+}
+
+
+
+.page-list .pagination span {
+  float: left;
+  cursor: pointer;
+}
+
+.page-list .pagination .separate span {
+  cursor: default;
+  border-top: none;
+  border-bottom: none;
+  margin: 0 5px;
+}
+
+.page-list .pagination .separate span:hover {
+  background: none;
+}
+
+.page-list .page-total {
+  float: left;
+  margin: 15px 20px;
+}
+
+.page-list .page-total input, .page-list .page-total select {
+  height: 26px;
+  border: 1px solid #ddd;
+}
+
+.page-list .page-total input {
+  width: 40px;
+  padding-left: 3px;
+}
+
+.page-list .page-total select {
+  width: 50px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.portlet-title {
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: @bg-gray;
+  .margin-bottom;
+}
+
+.item {
+  //height: 45px;
+  //overflow: hidden;
+}
+
+.file-group {
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 200px;
+    opacity: 0;
+    width: 123px;
+    height: 36px;
+    overflow: hidden;
+  }
+}
+.downloaded-img{
+  width: 200px;
+  margin: 10px;
+  img,canvas{
+    max-width: 100%;
+  }
+}
+.new-btn {
+  margin-right: 20px;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  &:focus {
+    color: #fff;
+  }
+}
+
+.new-btn-yellow {
+  color: #ffa400;
+}
+
+.new-btn-blue {
+  color: #5aabfc
+}
+
+.new-btn-red {
+  color: #e62f17;
+}
+.new-btn-detail{
+  color: #4db34d;
+}
+.btn-green {
+  background-color: #4db34d;
+  color: #fff;
+  margin-right: 12px;
+  &:hover {
+    background-color: #5ad25a;
+    color: #fff;
+  }
+}
+
+.btn-yellow {
+  background: #111;
+}
+
+.btn-add {
+  padding: 5px 18px;
+  font-size: 16px;
+}
+.btn-cancel{
+  padding: 5px 18px;
+  font-size: 16px;
+  background-color: #c9c9c9;
+  color: #fff;
+  border-color: #c9c9c9;
+  &:hover,&:active{
+    background-color: #b5b5b5;
+    border-color: #b5b5b5;
+    color: #fff;
+  }
+}
+.modal-footer .btn + .btn{
+  margin-left: 15px;
+}
+.not-allowed[type=button] {
+  cursor: not-allowed;
+}
+
+.table1 {
+  tbody {
+    color: #555;
+  }
+  > thead > tr > th {
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px;
+    text-align: center;
+  }
+  > thead > tr > td {
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  > tbody > tr > td {
+    vertical-align: middle;
+    padding-left: 20px;
+    height: 60px;
+    padding-right: 20px;
+  }
+  > tfoot > tr > td {
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+  }
+}
+
+.table-new {
+  th {
+    color: #333;
+    font-weight: normal;
+    font-size: 15px;
+    height: 50px;
+    vertical-align: middle;
+    background-color: #f9f9f9;
+  }
+  td {
+    color: #666;
+    font-size: 13px;
+    height: 60px;
+    vertical-align: middle;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tbody tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  tbody tr:hover {
+    background-color: #ededed;
+  }
+}
+
+.body-head {
+  min-height: 76px;
+  padding: 20px 0 8px;
+}
+
+.btn-detail {
+  background-color: #05a0da;
+  color: #fff;
+  padding: 5px 12px;
+  &:hover {
+    color: #fff;
+    background-color: #228df2;
+  }
+}
+
+input.sxtx-checkbox{
+  &:focus,&:visited{
+    outline: none;
+  }
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0 8px;
+  top: 5px;
+  &:before{
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 0;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    z-index: 2;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 5px;
+    left: 5px;
+    border: 2px solid #333;
+    border-top: none;
+    border-right: none;
+    opacity: 0.1;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    cursor: pointer;
+  }
+  &:hover:after{
+    opacity: 0.5;
+  }
+  &:checked:after{
+    border-color: #05a0da;
+    opacity: 1;
+  }
+}
+.btn-success{
+  margin-right: 12px;
+  background-color: #4db34d;
+  &:hover{
+    background-color: #429942;
+  }
+}
+.btn-modal{
+  padding: 5px 18px;
+  font-size: 16px;
+  background-color: #4db34d;
+  color: #fff;
+  &:hover {
+    background-color: #429942;
+    color: #fff;
+    border-color: #429942;
+  }
+}
+.modal-title{
+  font-size: 16px;
+  color: #555;
+  font-weight: 300;
+}
+.control-label,label{
+  color: #555;
+  font-weight: 300;
+}
+.modal-footer{
+  //padding: 20px 64px 30px 15px;
+  padding: 30px 30px 30px 15px;
+}
+.btn-modal-cancel{
+  padding: 5px 18px;
+  font-size: 16px;
+  background-color: #c9c9c9;
+  color: #fff;
+  border-color: #c9c9c9;
+  &:hover,&:active{
+    background-color: #b5b5b5;
+    border-color: #b5b5b5;
+    color: #fff;
+  }
+}
+.crumb{
+  color: #999;
+  font-size: 14px;
+  padding: 25px 0 3px;
+  .second{
+    color: #333;
+  }
+  .crumb-arrow{
+    font-size: 17px;
+  }
+}
+.close{
+  opacity: 1;
+  outline: none;
+}
+.close:hover{
+  opacity: 1;
+}
+.modal-header{
+  background-color: #ededed;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.modal-body{
+  padding-top: 30px;
+  .control-label{
+    padding-right: 0;
+  }
+}
+.btn-reset{
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.search-info{
+  margin: 0 0 8px 0;
+}
+.modal-dialog{
+  margin-bottom: 105px;
+}
+.form-control[readonly]{
+  background-color: #fff;
+}
+.selectize-control.single .selectize-input:after {
+  display: none;
+}
+.color-red{
+  color: red;
+}
+.iframe{
+  width: 800px;margin-left: -100px;background-color: #fff;margin-bottom: -30px;border: 5px;
+  box-shadow: 0 0 5px #cdcdcd;
+  height: 800px;
+}

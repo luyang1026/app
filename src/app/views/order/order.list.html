@@ -1,0 +1,160 @@
+<div class="swalk-category-list">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div>
+                        <div class="crumb">
+                            酒店管理 <span class="crumb-arrow">></span> <span class="second">订单管理</span>
+                        </div>
+                    </div>
+                    <div class="body-head clearfix">
+                        <!--<div class="col-md-12 margin-bottom">-->
+                            <!--<div class="row">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-md-12">
+                            <div class="row margin-bottom">
+                                <div style="float: left;padding-right: 10px;line-height: 34px;" class="text-right">开始日期:</div>
+                                <div style="width: 140px;float: left">
+                                    <input class="form-control"  datepicker-popup="yyyy-MM-dd" size="16" type="text" ng-model="startDate" readonly datetimez/>
+                                </div>
+                                <div style="float: left;padding-right: 10px;padding-left: 15px;line-height: 34px;" class="text-right">结束日期:</div>
+                                <div style="width: 140px;float: left">
+                                    <input class="form-control"  datepicker-popup="yyyy-MM-dd" size="16" type="text" ng-model="endDate" readonly datetimez/>
+                                </div>
+                                <!--<button type="button" class="btn btn-green btn-add" ng-click="excelExport()" style="margin-left: 20px">导出excel</button>-->
+                                <button down-file="{{excelExportUrl()}}" down-file-type="xlsx" class="btn btn-green btn-add" data-name="订单.xls" start-date="{{startDate}}" end-date="{{endDate}}" style="margin-left: 20px">导出excel</button>
+                            </div>
+                            <div class="row">
+                                <div class="form-group form-inline">
+                                    <div class="order-label" style="margin: 0;padding-left: 12px;">订单号:</div>
+                                    <input ng-model="orderNo" class="form-control input-inline"  enter-search enterfun="search()" style="padding: 8px 10px;margin-left: 8px;width: 140px;" placeholder="请输入订单号"/>
+                                    <div class="order-label">联系人:</div>
+                                    <input ng-model="contactsName" class="form-control input-inline"  enter-search enterfun="search()" style="padding: 8px 10px;margin-left: 8px;width: 140px;" placeholder="请输入完整姓名"/>
+                                    <div class="order-label">联系电话:</div>
+                                    <input ng-model="contactsPhone" class="form-control input-inline"  enter-search enterfun="search()" style="padding: 8px 10px;margin-left: 8px;width: 140px;" placeholder="请输入完整号码"/>
+                                    <div class="order-label">订单状态:</div>
+                                    <select class="form-control input-inline" ng-model="orderStatus" ng-change="search()" style="width: 140px;margin-left: 8px;">
+                                        <option value="1000">--请选择--</option>
+                                        <option value="线上已支付">线上已支付</option>
+                                        <option value="线下未支付">线下未支付</option>
+                                        <option value="取消">取消</option>
+                                        <option value="已取消">已取消</option>
+                                        <option value="线上已完成">线上已完成</option>
+                                        <option value="线下已完成">线下已完成</option>
+                                    </select>
+                                    <input type="button" class="btn btn-detail" value="查询" ng-click="search();" style="margin-left: 8px">
+                                    <button type="button" class="btn btn-success btn-reset" ng-click="reset()">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-scrollable">
+                        <div class="search-info" ng-if="searchInfo">
+                            以下为
+                            <span ng-if="orderNoBackup != ''"> "订单号：{{orderNoBackup}}" </span>
+                            <span ng-if="contactsNameBackup != ''"> "联系人：{{contactsName}}" </span>
+                            <span ng-if="contactsPhoneBackup != ''"> "联系电话：{{contactsPhone}}" </span>
+                            <span ng-if="orderStatus != '1000'"> "订单状态：{{orderStatus}}" </span>
+                            的搜索结果
+                        </div>
+                        <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                            <thead>
+                            <tr>
+                                <th width="120"> 订单编号 </th>
+                                <th> 房源名称 </th>
+                                <th> 产品名称 </th>
+                                <th> 数量 </th>
+                                <th> 联系人 </th>
+                                <th> 联系电话 </th>
+                                <th> 入住日期 </th>
+                                <th> 退房日期 </th>
+                                <!--<th> 支付方式 </th>-->
+                                <th> 订单总额 </th>
+                                <!--<th> 已支付金额 </th>-->
+                                <th> 订单状态 </th>
+                                <th> 酒店确认号 </th>
+                                <th> 是否允许退单 </th>
+                                <th> 操作 </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="order in orderList">
+                                <td style="word-break:break-all;width: 120px">
+                                    {{::order.order_no}}
+                                </td>
+                                <td>
+                                    {{::order.productMDB.house_name}}
+                                </td>
+                                <td>{{::order.productMDB.name}}</td>
+                                <td>{{::order.number}}</td>
+                                <td>
+                                    {{::order.contacts_name}}
+                                </td>
+                                <td>
+                                    {{::order.contacts_phone}}
+                                </td>
+                                <td>
+                                    {{::order.start_date}}
+                                </td>
+                                <td>
+                                    {{::order.end_date}}
+                                </td>
+                                <!--<td>-->
+                                    <!--<p ng-if="order.pay_type == 0">线下支付</p>-->
+                                    <!--<p ng-if="order.pay_type == 1">线上支付</p>-->
+                                <!--</td>-->
+                                </td>
+                                <td>
+                                    {{::order.sum}}
+                                </td>
+                                <!--<td>-->
+                                    <!--{{::order.paid}}-->
+                                <!--</td>-->
+                                <td>
+                                    <p ng-if="(order.pay_type == 0) && (order.order_status == 1 || order.order_status == 4)">线下未支付</p>
+                                    <p ng-if="order.pay_type == 1 && order.order_status == 2 ">线上已支付</p>
+                                    <p ng-if="order.order_status == -1">订单取消</p>
+                                    <p ng-if="order.order_status == -2">取消退款中</p>
+                                    <p ng-if="order.order_status == -3">拒单退款中</p>
+                                    <p ng-if="order.order_status == -4">拒单成功</p>
+                                    <p ng-if="order.order_status == -5">取消退款成功</p>
+                                    <p ng-if="order.order_status == -6">拒单退款失败</p>
+                                    <p ng-if="order.order_status == -7">取消退款失败</p>
+                                    <p ng-if="order.pay_type == 0 && order.order_status == 3">线下已完成</p>
+                                    <p ng-if="order.pay_type == 1 && order.order_status == 3">线上已完成</p>
+                                </td>
+                                <td>
+                                    <input ng-if="order.order_status == 2 || order.thirdPartNo != ''" type="text" ng-model="order.thirdPartNo" ng-blur="order.blur()" class="form-control" style="width: 60px;padding: 5px 0;text-align: center">
+                                </td>
+                                <td>
+                                    <p ng-if="order.productMDB.isBack == 0 ">允许退单</p>
+                                    <p ng-if="order.productMDB.isBack == 1 ">不允许退单</p>
+                                </td>
+                                <td>
+                                    <!--<a class="new-btn new-btn-blue" down-file="{{order.wordExport()}}" down-file-type="xlsx" data-name="订单{{order.order_no}}.doc">导出订单</a>-->
+                                    <a class="new-btn new-btn-blue" ng-click="print(order)">打印订单</a>
+                                    <br/>
+                                    <a ng-if="order.order_status == -1" class="new-btn new-btn-yellow" ng-click="order.cancel()">确认取消</a>
+                                    <br/>
+                                    <a ng-if="order.order_status == 1 || order.order_status == 2" class="new-btn new-btn-yellow" ng-click="order.refuse()">拒单</a>
+                                    <br/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

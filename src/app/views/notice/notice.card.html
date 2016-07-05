@@ -1,0 +1,74 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">公告信息</label>
+    </div>
+
+</div>
+
+<div class="modal-body form">
+    <form id="noticeForm" name="noticeForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+        <div class="form-group ">
+            <label class="col-md-3 control-label">标题</label>
+            <div class="col-sm-8" style="vertical-align:middle">
+                <input type="text" class="form-control" name="title" ng-model="notice.title" ng-disabled="!beginEdit" required/>
+                <span ng-show="!noticeForm.title.$valid" style="color:red">请填写新闻标题</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">类型</label>
+            <div class="col-md-8" style="vertical-align:middle">
+                <select name="categoryName" ng-model="notice.noticeType" class="form-control input-inline"
+                        ng-options="category.id as category.name for category in categoryList" ng-change="contentChange()" ng-disabled="!beginEdit" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <span ng-show="!notice.noticeType" style="color:red">请选择新闻发布的类型</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">物业类型</label>
+            <div class="col-md-8">
+                <select class="form-control" ng-model="notice.type"
+                        ng-options="house.id as house.name for house in houses"  style="width: 100%" ng-disabled="!beginEdit" ng-change="propertyChange()" required>
+                    <option value="">-- 请选择类型 --</option>
+                </select>
+                <div ng-show="!notice.type" style="color:red">请选择物业类型</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">房源名称</label>
+            <div class="col-md-8 lh40 col-middle selectize-noicon" style="vertical-align:middle">
+                <select id="houseSearch" ng-model="notice.foreignId"  placeholder="请输入房源名称" ng-disabled="!beginEdit" required></select>
+                <span ng-show="!notice.foreignId&&selectizeFlag" style="color:red">请选择新闻发布的房源</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">日期</label>
+            <div class="col-md-8">
+                <input id="datetimez" class="form-control"  size="16" type="text" ng-model="notice.date" readonly datepicker-popup="yyyy-MM-dd" datetimez ng-disabled="!beginEdit" required/>
+                <!--<span class="input-group-addon" ng-show="beginEdit" ng-click="clickDate()"><span class="glyphicon glyphicon-calendar" ></span></span>-->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">详情描述</label>
+            <div class="col-sm-8">
+                <textarea ng-model="notice.content" class="form-control" style="height: 200px;" ng-disabled="!beginEdit" require ng-maxlength="200" required></textarea>
+                <div ng-show="!notice.content" style="color:red">详情描述不能为空并且最多不能超过200字</div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <span ng-show="saveSuccess" style="color: green">保存成功!!!</span>
+    <span ng-show="saveFail" style="color: red">保存失败!!!</span>
+    <button type="button" class="btn btn-success btn-modal" ng-click="assignNew()" ng-show="showButton" ng-disabled="noticeForm.$invalid || holdDoubleClick">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">关 闭</button>
+</div>
+
+
+
+
+

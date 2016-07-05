@@ -1,0 +1,116 @@
+<div class="swalk-category-list container-fluid">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="crumb">
+                    商户管理 <span class="crumb-arrow">></span> <span class="second">商户信息管理</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <pre>{{subscriber_info_form|json}}</pre> -->
+    <form class="form-horizontal" style="margin-top:20px;" name="subscriber_info_form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-merchId" class="col-md-4 control-label">商户编号</label>
+                    <div class="col-md-8">
+                        <input type="text" id="subscriber-merchId" name="merchId" class="form-control" ng-model="merchId" ng-pattern="/^\d+$/">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-merchName" class="col-md-4 control-label">商户名称</label>
+                    <div class="col-md-8">
+                        <input type="text" id="subscriber-merchName" class="form-control" ng-model="merchName">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-contractId" class="col-md-4 control-label">联系人手机</label>
+                    <div class="col-md-8">
+                        <input type="text" id="subscriber-contractId" class="form-control" ng-model="linkTel" ng-pattern="/^\d+$/">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-bankId" class="col-md-4 control-label">银行账号</label>
+                    <div class="col-md-8">
+                        <input type="text" id="subscriber-bankId" class="form-control" ng-model="bankId">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-type" class="col-md-4 control-label">类型</label>
+                    <div class="col-md-8">
+                        <select name="" id="subscriber-type" class="form-control">
+                            <option value="personal">个人</option>
+                            <option value="organization">机构</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="subscriber-channel-type" class="col-md-4 control-label">渠道类型</label>
+                    <div class="col-md-8">
+                        <select name="" id="subscriber-channel-type" class="form-control">
+                            <option value="personal">米饭公社</option>
+                            <option value="organization">盛行天下</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px">
+            <div class="col-md-4">
+                <button type="button" class="btn btn-success btn-add" ui-sref="forum.main.subscriber.info.action({action:'add'})">+新增</button>
+                <button type="button" class="btn btn-danger btn-add" ng-click="action.deleteItem()">-删除</button>
+            </div>
+            <div class="col-md-3 col-md-offset-5 text-justify">
+                <button type="button" class="btn btn-detail" ng-click="action.queryOnCondition()">查询</button>
+                <button type="button" class="btn btn-success btn-reset" ng-click="action.reset()">重置</button>
+            </div>
+        </div>
+    </form>
+    <div class="row" style="min-height:470px;">  
+        <table class="table table-bordered table-hover text-center" style="margin-top:20px;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>商户编号</th>
+                    <th>商户名称</th>
+                    <th>渠道</th>
+                    <th>地址</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="merch in merchList">
+                    <td>
+                        <input type="checkbox" ng-model="merch.toBeDeleted">
+                    </td>
+                    <td>{{merch.merchId}}</td>
+                    <td>{{merch.merchName}}</td>
+                    <td>{{merch.channelId|channel}}</td>
+                    <td>{{merch.address}}</td>
+                    <td>
+                        <button class="btn btn-link btn-xs" ui-sref="forum.main.subscriber.info.action({action:'edit',id:merch.merchId})"" ng-show="merch.status==0000">修改</button>
+                        <button class="btn btn-link btn-xs" ui-sref="forum.main.subscriber.info.action({action:'detail',id:merch.merchId})" ng-show="merch.status==0000">详情</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row text-center page-area">
+        <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="action.pageRefresh(currentPage-1)" previous-text="上一页" next-text="下一页">
+        </uib-pagination>    
+    </div>
+</div>

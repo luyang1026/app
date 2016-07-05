@@ -1,0 +1,123 @@
+<div class="modal-header" >
+    <button type="button" class="close" ng-click="closeModal()" aria-hidden="true"><span class="modal-close"></span></button>
+    <div>
+        <label class="modal-title">参数管理</label>
+    </div>
+</div>
+
+<div class="modal-body form" style="overflow: hidden">
+    <form id="noticeForm" name="noticeForm" class="form-horizontal form-row-seperated ng-pristine ng-valid" novalid>
+        <div class="form-group ">
+            <label class="col-sm-3 control-label text-right" style="vertical-align:middle;">类型详情</label>
+            <div class="col-sm-8" style="vertical-align:middle">
+                <input ng-disabled="isRead" type="text" class="form-control" name="title" ng-model="category.name" required/>
+                <span ng-show="!noticeForm.title.$valid" style="color:red">请填写参数值名称</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" style="vertical-align:middle;">参数</label>
+            <div class="col-sm-8" style="vertical-align:middle">
+                <select ng-disabled="isRead" ng-model="category.type" class="form-control input-inline" ng-options="type.id as type.name for type in typeList" ng-change="typeChange()" required>
+                    <option value="">-- 请选择 --</option>
+                </select>
+                <span ng-show="!category.type" style="color:red">请选择参数</span>
+            </div>
+        </div>
+        <div class="form-group" ng-if="others.isDevice">
+            <div class="col-sm-12">
+                <div class="row">
+                    <label class="col-sm-3 control-label">添加选中图片</label>
+
+                    <div class="file-group" style="line-height: 34px;left: 16px;">
+                        <button class="btn btn-success" ng-disabled="multipleDetailShow">上传图片</button>
+                        <input type="file" nv-file-select="" uploader="uploader0" ng-if="!isRead" ng-disabled="holdDoubleClick"/><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-table" style="margin-left: 40px">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>图片</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-show="showOldPic0">
+                        <td>
+                            <div class="downloaded-img">
+                                <span nowrap>
+                                    <img ng-src="{{pictureUrlList[0]}}">
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr ng-repeat="item in uploader0.queue">
+
+                        <td>
+                            <div class="downloaded-img">
+                                <div ng-show="uploader0.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group" ng-if="others.isDevice">
+            <div class="col-sm-12">
+                <div class="row">
+                    <label class="col-sm-3 control-label">添加未选中图片</label>
+
+                    <div class="file-group" style="line-height: 34px;left: 16px;">
+                        <button class="btn btn-success" ng-disabled="multipleDetailShow">上传图片</button>
+                        <input type="file" nv-file-select="" uploader="uploader1" ng-if="!isRead" ng-disabled="holdDoubleClick"/><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-table">
+                <table class="table" style="margin-left: 40px">
+                    <thead>
+                    <tr>
+                        <th>图片</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-show="showOldPic1">
+                        <td>
+                            <div class="downloaded-img">
+                                <span nowrap>
+                                    <img ng-src="{{pictureUrlList[1]}}">
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr ng-repeat="item in uploader1.queue">
+
+                        <td>
+                            <div class="downloaded-img">
+                                <div ng-show="uploader1.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer" >
+    <span ng-show="others.saveSuccess" style="color: green" ng-if="!isRead">保存成功!!!</span>
+    <span ng-show="others.saveFail" style="color: red" ng-if="!isRead">保存失败!!!</span>
+    <button type="button" class="btn btn-success btn-modal" ng-click="save()" ng-disabled="noticeForm.$invalid || holdDoubleClick" ng-if="!isRead">确 认</button>
+    <button type="button" class="btn btn-modal-cancel" ng-click="closeModal()">取 消</button>
+</div>
+
+
+
+
+

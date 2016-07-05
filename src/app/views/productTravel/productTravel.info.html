@@ -1,0 +1,185 @@
+<div class="swalk-product-travel-info">
+    <div class="container-fluid">
+        <div>
+            <div class="crumb">
+                度假管理 <span class="crumb-arrow">></span> <span ui-sref="user({menu: 'productTravel',submenu: 'list'})" style="cursor: pointer">产品发布</span> <span class="crumb-arrow">></span> <span class="second">基本信息</span>
+            </div>
+        </div>
+        <div class="house-info">
+            <form id="sellerProductForm" name="sellerProductForm" novalid>
+                <div class="house-info-top" style="padding-top: 0;">
+                    <div class="house-h4">基本信息</div>
+                    <div class="house-panel clearfix">
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">产品名称</div>
+                            <div class="house-panel-input">
+                                <input type="text" name="name" placeholder="请填写产品名称" ng-model="product.name" ng-disabled="!infoPage.ableEdit" class="form-control" required/>
+                                <!--<div ng-show="!product.name" style="color:red">请填写产品名称</div>-->
+                            </div>
+                        </div>
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">主题</div>
+                            <div class="house-panel-input">
+                                <input type="text" name="theme" placeholder="请填写主题" ng-model="product.theme" ng-disabled="!infoPage.ableEdit" class="form-control" required/>
+                                <!--<div ng-show="!product.theme" style="color:red">请填写主题</div>-->
+                            </div>
+                        </div>
+
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">有效期起始时间</div>
+                            <div class="house-panel-input">
+                                <input class="form-control" placeholder="请选择开始时间"  size="16" type="text" datepicker-popup="yyyy-MM-dd" ng-model="product.timeIntervalStart" required readonly  datetimez ng-disabled="!infoPage.ableEdit"/>
+                                <!--<div ng-show="!product.timeIntervalStart" style="color:red">请选择开始时间</div>-->
+                            </div>
+                        </div>
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">有效期结束时间</div>
+                            <div class="house-panel-input">
+                                <input class="form-control" placeholder="请选择结束时间"  size="16" type="text" datepicker-popup="yyyy-MM-dd" ng-model="product.timeIntervalEnd" required readonly  datetimez ng-disabled="!infoPage.ableEdit"/>
+                                <!--<div ng-show="!product.timeIntervalEnd" style="color:red">请选择结束时间</div>-->
+                            </div>
+                        </div>
+
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">目的地</div>
+                            <div class="house-panel-input">
+                                <select id="cityId" class="form-control" ng-model="product.cityId"
+                                        ng-options="city.id as city.name for city in cities"  style="width: 100%" ng-disabled="!infoPage.ableEdit" required>
+                                    <option value="">-- 请选择目的地 --</option>
+                                </select>
+                                <!--<div ng-show="!product.cityId" style="color:red">请选择目的地</div>-->
+                            </div>
+                        </div>
+                        <div class="house-panel-form-group">
+                            <div class="house-panel-label text-right house-panel-label-debug">是否允许退单</div>
+                            <div class="house-panel-input">
+                                <select id="isBack" ng-model="product.isBack"  class="form-control input-inline" required style="width: 100%">
+                                    <option value="">-- 请选择 --</option>
+                                    <option value="0">允许</option>
+                                    <option value="1">不允许</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="rich-editor">
+                        <div class="house-h5">产品详情</div>
+                        <summernote lang="zh-CN" ng-model="product.proServiceDesc" config="options"></summernote>
+                    </div>
+
+                    <div class="rich-editor">
+                        <div class="house-h5">行程安排</div>
+                        <summernote lang="zh-CN" ng-model="product.proFlow" config="options"></summernote>
+                    </div>
+
+                    <div class="rich-editor">
+                        <div class="house-h5">产品注意事项</div>
+                        <summernote lang="zh-CN" ng-model="product.proNotice" config="options"></summernote>
+                    </div>
+
+                    <div class="house-panel-save">
+                        <button class="btn btn-detail" ng-click="saveInfo()" ng-disabled="infoPage.ableSaveMessage || holdDoubleClick">点击保存信息</button>
+                    </div>
+
+
+                </div>
+
+                <div class="hr"></div>
+
+                <div class="house-info-bottom clearfix">
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right" style="width: 95px">库存&价格</div>
+                        <div class="house-panel-input" style="width: 75%">
+                            <button type="button" class="btn btn-success" ng-click="addTime(product.id,timeList,product)" ng-disabled="!infoPage.ableSaveSuccess||!infoPage.ableEdit">添加库存&价格</button>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-bordered table-checkable table1 table-new">
+                            <thead>
+                            <tr>
+                                <th> 开始时间 </th>
+                                <th> 结束时间 </th>
+                                <th> 最晚成团时间 </th>
+                                <th> 最少成团份数 </th>
+                                <th> 份数上限 </th>
+                                <th> 价格 </th>
+                                <th> 操作 </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="time in timeList">
+                                <td>{{::time.startDate}}</td>
+                                <td>{{::time.endDate}}</td>
+                                <td>{{::time.lastDealDate}}</td>
+                                <td>{{::time.last_pro_num}}</td>
+                                <td>{{::time.proTotal}}</td>
+                                <td>{{::time.price}}</td>
+                                <td>
+                                    <a class="new-btn new-btn-detail" ng-click="time.modify($index,timeList,time,product)"  ng-show="!detailButtonShow">修改</a>
+                                    <a class="new-btn new-btn-red" ng-click="time.delete($index)"  ng-show="!detailButtonShow"> 删除 </a>
+                                    <a class="new-btn" ng-show="detailButtonShow">修改</a>
+                                    <a class="new-btn" ng-show="detailButtonShow">删除</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="house-info-mid clearfix">
+                    <div class="house-h5">图片管理</div>
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">{{infoPage.wordInfoPage}}图片</div>
+                        <div class="house-panel-input" style="width: 75%">
+                            <button type="button" class="btn btn-success" ng-click="addPic(picInfo,picOthers,product)" ng-disabled="!infoPage.ableSaveSuccess">{{infoPage.wordInfoPage}}图片</button>
+                                <span style="vertical-align:middle;color: #999">
+                                    首页图片: {{picOthers.homepagePicNum}} 张&nbsp&nbsp&nbsp详情图片: {{picOthers.detailPicNum}} 张
+                                </span>
+                            <!--<div ng-show="!infoPage.ableSaveSuccess" style="color: red">请先保存信息!!!</div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="house-info-bottom clearfix">
+                    <div class="house-h5">合作商户</div>
+                    <div class="house-panel-form-group">
+                        <div class="house-panel-label text-right">添加商户</div>
+                        <div class="house-panel-input" style="width: 75%">
+                            <button type="button" class="btn btn-success" ng-click="addService(product.id,services)" ng-disabled="!infoPage.ableSaveSuccess||!infoPage.ableEdit">添加商户</button>
+                            <!--<div ng-show="!infoPage.ableSaveSuccess" style="color: red">请先保存信息!!!</div>-->
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-bordered table-checkable table1 table-new" id="sample_3">
+                            <thead>
+                            <tr>
+                                <th> 序号 </th>
+                                <th> 商户名称 </th>
+                                <th> 商户服务 </th>
+                                <th> 价格 </th>
+                                <th> 操作 </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="service in services">
+                                <td ng-bind="$index+1" style="text-align:center;vertical-align:middle"></td>
+                                <td>{{service.providerName}}</td>
+                                <td>{{service.service}}</td>
+                                <td>{{service.price}}</td>
+                                <td style="text-align:center;vertical-align:middle">
+                                    <a class="new-btn new-btn-detail" ng-click="service.modify($index,services)"  ng-show="!detailButtonShow">修改</a>
+                                    <a class="new-btn new-btn-red" ng-click="service.delete($index)"  ng-show="!detailButtonShow"> 删除 </a>
+                                    <a class="new-btn" ng-show="detailButtonShow">修改</a>
+                                    <a class="new-btn" ng-show="detailButtonShow">删除</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

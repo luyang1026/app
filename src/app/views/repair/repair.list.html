@@ -1,0 +1,90 @@
+<div class="repair">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="crumb">
+                        业主维护 <span class="crumb-arrow">></span> <span class="second">维修记录</span>
+                    </div>
+                    <div class="body-head clearfix">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <button type="button" class="btn btn-green btn-add" ng-click="add()">+ 新增</button>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row text-right">
+                                <div class="form-group form-inline" style="display: inline-block;margin-right: 15px;">
+                                    <label>选择项目类型</label>
+                                    <select id="selectItem" ng-model="selectItem" class="form-control input-xs input-inline" ng-options="item.id as item.name for item in categoryList"  ng-change = "load()" required style="margin-left: 8px;">
+                                        <option value="">-- 全部 --</option>
+                                    </select>
+                                </div>
+                                <div class="form-group form-inline" style="display: inline-block">
+                                    <label>资产名称/资产编号/资产所有人</label>
+                                    <input id="assetName" class="form-control input-xs input-inline"
+                                           placeholder="请输入资产名称或者资产编号" enter-search enterfun="search()" style="padding: 8px 10px;margin-left: 8px;width: 207px" ng-model="searchVal"/>
+                                    <input type="button" class="btn btn-detail" value="查询" ng-click="search();" style="margin-left: 8px">
+                                    <button type="button" class="btn btn-success btn-reset" ng-click="reset()">重置</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-scrollable">
+                        <div class="search-info" ng-if="searchInfo">
+                            以下为关键词“{{searchValBackup}}”的搜索结果
+                        </div>
+                        <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                            <thead>
+                            <tr>
+                                <th>资产编号/资产名称</th>
+                                <th>项目</th>
+                                <th>日期</th>
+                                <th>服务人员</th>
+                                <th>费用</th>
+                                <th>费用检查结果</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="assetManage in repairlist">
+                                <td>
+                                    {{assetManage.assetNo}}/{{assetManage.assetName}}<span ng-if="assetManage.userName">/</span>{{assetManage.userName}}
+                                </td>
+                                <td class="center">
+                                    {{assetManage.housekeeperName}}
+                                </td>
+                                <td>
+                                    {{assetManage.date}}
+                                </td>
+                                <td>
+                                    {{assetManage.worker}}
+                                </td>
+                                <td>
+                                    {{assetManage.fee}}
+                                </td>
+                                <td>
+                                    {{assetManage.checkResult}}
+                                </td>
+
+                                <td>
+                                    <a class="new-btn new-btn-yellow" ng-click="assetManage.detail(0)">详情</a>
+                                    <a class="new-btn new-btn-blue" ng-click="assetManage.detail(1)">修改</a>
+                                    <a class="new-btn new-btn-red" ng-click="assetManage.delete()">删除</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

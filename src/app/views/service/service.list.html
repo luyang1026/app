@@ -1,0 +1,71 @@
+<div class="swalk-service-list">
+    <!-- BEGIN MAIN CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="crumb">
+                        数据维护 <span class="crumb-arrow">></span> <span class="second">服务管理</span>
+                    </div>
+                    <div class="body-head clearfix">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <button type="button" class="btn btn-green btn-add" ng-click="add()">+ 新增</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row text-right">
+                                <div class="form-group form-inline">
+                                    <label>选择服务类型</label>
+                                    <select id="type" ng-model="type" ng-change="load()" class="form-control input-inline" required style="padding: 8px 10px;margin-left: 8px;height: 40px">
+                                        <option value="">-- 请选择 --</option>
+                                        <option value="0">平台服务</option>
+                                        <option value="1">服务</option>
+                                    </select>
+                                    <!--<input type="button" class="btn btn-detail" value="查询" ng-click="load();" style="margin-left: 8px">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-bordered table-checkable table1 table-new" id="sample_1">
+                            <thead>
+                            <tr>
+                                <th> 服务名称 </th>
+                                <th> 服务类型 </th>
+                                <th> 服务范围 </th>
+                                <th> 操作 </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="service in serviceList">
+                                <td>
+                                    {{::service.name}}
+                                </td>
+                                <td>
+                                <div ng-if="::service.type == 0" >平台服务</div>
+                                <div ng-if="::service.type == 1" >服务</div>
+                                </td>
+                                <td>
+                                    {{::service.serviceTypeName}}
+                                </td>
+                                <td>
+                                    <a class="new-btn new-btn-yellow" ng-click="service.detail()"> 详情 </a>&nbsp;&nbsp;
+                                    <a class="new-btn new-btn-blue" ng-click="service.modify()"> 修改 </a>&nbsp;&nbsp;
+                                    <a class="new-btn new-btn-red" ng-click="service.delete()"> 删除 </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
